@@ -1,0 +1,50 @@
+<header>
+  <div id="more-info" class="shifted hidden">
+    You are playing <a href="http://blog.fourtonfish.com/tagged/detective" target="_blank">Detective</a> by
+    <a href="https://twitter.com/fourtonfish" target="_blank">@fourtonfish</a> as <span id="role-reminder"></span>. Powered by <a href="https://www.botlibre.com/" target="_blank">BOT libre</a>.<!-- <a id="request-notification-permission" href="#" title="Click here to enable notifications in supported browsers">Enable notifications</a>-->
+  </div>
+</header>
+<section id="main">
+  <div id="instructions-wrapper">
+    <h1 id="loading" class="shifted-1">Waiting for a new connection...</h1>
+    <!--
+    <img src="images/art/machine.png" class="shifted-1" title="Some kind of a machine">
+    -->
+    <!--
+      <p id="what-is-this" class="shifted-1"><a href="http://blog.fourtonfish.com/tagged/detective" target="_blank">About this game</a></p>
+    -->
+    <h1 id="you-are" class="shifted">Loading...</h1>
+    <p id="instructions" class="shifted"></p>
+    <button id="dismiss-instructions" class="shifted">Got it</button>
+  </div>
+  <div id="messages-wrapper">
+    <ul id="messages"></ul>
+  </div>
+  <form id="message-form" class="hidden" action="">
+    <input type="text" id="message-text" autocomplete="off" placeholder="Type..." autofocus /><button id="send-message" class="shifted">Send!</button>
+  </form>
+  <div id="share-chat-log-wrapper">
+    <ul id="share-buttons-game" class="share-buttons">
+      <li class="share-link-shifted"><i class="fa fa-fw fa-refresh" title="Play another game" data-url="RELOAD"></i></li>
+<!--
+http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters
+
+      <li class="share-link-shifted"><i class="fa fa-fw fa-facebook-official" title="Share this log on Facebook" data-url="https://www.facebook.com/sharer/sharer.php?u=CHATLOGURL&t=SHORTTITLE"></i></li>
+-->
+      <li class="share-link-shifted"><i class="fa fa-fw fa-twitter" title="Share this log on Twitter" data-url="https://twitter.com/intent/tweet?source=CHATLOGURL&text=SHORTTITLE:%20CHATLOGURL" data-service="twitter"></i></li>
+      <li class="share-link-shifted"><i class="fa fa-fw fa-google-plus" title="Share this log on Google+" data-url="https://plus.google.com/share?url=CHATLOGURL" data-service="google-plus"></i></li>
+      <li class="share-link-shifted"><i class="fa fa-fw fa-tumblr" title="Share this log on Tumblr" data-url="http://www.tumblr.com/share?v=3&u=CHATLOGURL&t=SHORTTITLE&s=" data-service="tumblr"></i></li>
+      <!--
+      <li class="share-link-shifted"><i class="fa fa-fw fa-reddit" title="Share this log on Reddit" data-url="http://www.reddit.com/r/impostors/submit?url=CHATLOGURL&title=SHORTTITLE" data-service="reddit"></i></li>
+      -->
+      <li class="share-link-shifted"><i class="fa fa-fw fa-envelope" title="Send this log by email" data-url="mailto:?subject=SHORTTITLE&body=DESCRIPTION:%20CHATLOGURL" data-service=""></i></li>
+      <!--
+      <li class="share-link-shifted"><i class="fa fa-fw fa-external-link" title="Open in a new window/tab" data-url="EXTERNAL"></i></li>
+      -->
+      <li class="share-link-shifted" id="chat-log-url-status"></li>
+    </ul>
+  </div>
+</section>
+<script src="libs/socket.io.js"></script>
+<script src="libs/xml2json.js"></script>
+<script src="js/scripts.1.5.min.js"></script>
