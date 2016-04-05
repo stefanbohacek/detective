@@ -1,5 +1,7 @@
 # DETECTIVE
 
+[![A dective](/readme-images/detective.png)](http://fourtonfish.com/detective/)
+
 ## About the game
 
 Detective is a game created by [Stefan Bohacek](https://twitter.com/fourtonfish). The rules are fairly simple:
@@ -11,6 +13,7 @@ Detective is a game created by [Stefan Bohacek](https://twitter.com/fourtonfish)
 5. As a Detective, player needs to correctly guess whether they are speaking with the Impostor. This is done by saying `you are an impostor` or `you are a robot`.
 
 Play the game a few times, and observe how the Robot answers questions. As an Impostor, you will want to mimic those responses. If you're playing as a Detective, well, good luck, I guess!
+
 
 [![Not even trying](/readme-images/doing-it-wrong.png)](http://fourtonfish.com/detective/log?id=878)
 
@@ -54,3 +57,8 @@ If you have any questions, try [stefan@botwiki.org](mailto:stefan@botwiki.org), 
 
 Some of the code really needs to be cleaned up: see hacks such as using a class `shifted-1`, or how some of the code really should be modularized (for example the `badWords`).
 
+Feel free to [open a new issue](https://github.com/botwiki/detective/issues/new) if you notice anything that should be fixed, or would like to see a new feature added.
+
+Also, one way to support the development is to [donate to Botwiki](https://botwiki.org/about/support/), which will also get you on the [list of supporters](https://botwiki.org/about/supporters/) :-)
+
+Thanks!
