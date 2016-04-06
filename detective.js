@@ -50,13 +50,13 @@ function createRoom(){
   }
   else{
     rooms.push(newRoom);
-//TODO: Find a more eloquent solution here    
+//TODO: Find a more eloquent solution here
     if (getRandomInt(0, 1) === 0){
       detective = unassignedUsers.shift();
-      impostor = unassignedUsers.shift();      
+      impostor = unassignedUsers.shift();
     }
     else{
-      impostor = unassignedUsers.shift();      
+      impostor = unassignedUsers.shift();
       detective = unassignedUsers.shift();
     }
     detective.join(newRoom);
@@ -114,13 +114,13 @@ app.get('/log', function (req, res) {
   if (loggingEnabled === true){
     console.log('Getting log for ID = ' + req.query.id);
   }
-  connection.query('SELECT * from detective WHERE id = ' + req.query.id, function(err, rows, fields) {
+  connection.query('SELECT * from detective WHERE id = ?', [req.query.id], function(err, rows, fields) {
     if (!err){
       var chat_log, last_update, played_by = '';
       if (rows.length > 0){
-        chat_log = unescape(rows[0].chat_log);
+        chat_log = rows[0].chat_log;
         last_update = moment(rows[0].time).fromNow();
-        var user_role = unescape(rows[0].user_role);
+        var user_role = rows[0].user_role;
 
         if (user_role === 'detective' || user_role === 'impostor'){
           played_by = "Played by " + user_role.toUpperCase();
@@ -134,7 +134,7 @@ app.get('/log', function (req, res) {
         chat_log: chat_log,
         played_by: played_by,
         last_update: last_update
-      });        
+      });
 
     }
     else{
@@ -189,7 +189,7 @@ io.on('connection', function (socket) {
     if (data.message.length > 0){
       socket.rooms.forEach(function(room){
         socket.to(room).emit('message received', data);
-      });      
+      });
     }
   });
 
@@ -203,7 +203,7 @@ io.on('connection', function (socket) {
     if (loggingEnabled === true){
       console.log('Saving chat log');
     }
-    connection.query('INSERT INTO detective (chat_log, user_role, time) VALUES ("' + escape(chatLog) + '","'+ escape(userRole) +'",now())',
+    connection.query('INSERT INTO detective (chat_log, user_role, time) VALUES (?, ?, now())', [chatLog, userRole],
       function(err, info) {
         if (!err){
           socket.emit('chat_log_saved', info.insertId);
@@ -246,5 +246,5 @@ io.on('connection', function (socket) {
       console.log(socket.adapter.sids[socket.id]);
     }
     Object.getPrototypeOf(this).onclose.call(this,reason);
-  }  
+  }
 });
