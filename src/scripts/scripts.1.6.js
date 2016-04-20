@@ -257,6 +257,9 @@ ready(function(){
       'I\'m homeless?'
       ],
       badWords = [
+/*
+      Imported from https://github.com/dariusk/wordfilter.
+*/      
         "beeyotch",
         "biatch",
         "bitch",
@@ -638,7 +641,7 @@ function containsOffensiveLanguage(text){
     }
 
     if (messageText === 'Game is over' && messageFrom === 'system'){
-      newMessage.innerHTML += '<p style="color: #fff !important;">PS: Like bots? Check out <a target="_blank" href="https://botwiki.org/?ref=detective">botwiki.org</a>!</p>';
+      newMessage.innerHTML += '<p style="color: #fff !important;">PS: This game is now <a target="_blank" href="https://github.com/botwiki/detective/">open source</a>!</p>';
     }
 
 
@@ -914,12 +917,6 @@ function containsOffensiveLanguage(text){
     }
     if (data.from !== userRole){
       addMessage(partnerRole, data.message);
-    }
-  });
-
-  socket.on('security info', function(data) {
-    if (window.location.search === '?security_info=true'){
-      console.log(data);
     }
   });
 });
