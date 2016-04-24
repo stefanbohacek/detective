@@ -378,8 +378,8 @@ io.on('connection', function (socket) {
     }
     data.message = data.message.replace(/(<([^>]+)>)/ig,"");
     if (data.message.length > 0){
-      console.log('!!!!!!!!!!!!!!!!!!!socket');
-      console.log(socket);
+      console.log('!!!!!!!!!!!!!!!!!!!socket.rooms');
+      console.log(socket.rooms);
       socket.rooms.forEach(function(room){
         socket.to(room).emit('message received', data);
       });      
@@ -388,8 +388,8 @@ io.on('connection', function (socket) {
 
   socket.on('game over', function(status){
     console.log('game over...');
-    console.log('!!!!!!!!!!!!!!!!!!!socket');
-    console.log(socket);
+    console.log('!!!!!!!!!!!!!!!!!!!socket.rooms');
+    console.log(socket.rooms);
 
     socket.rooms.forEach(function(room){
       console.log('room');
