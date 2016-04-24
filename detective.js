@@ -388,9 +388,10 @@ io.on('connection', function (socket) {
 
   socket.on('game over', function(status){
     console.log('game over...');
+    console.log('!!!!!!!!!!!!!!!!!!!socket');
+    console.log(socket);
+
     socket.rooms.forEach(function(room){
-      console.log('!!!!!!!!!!!!!!!!!!!socket');
-      console.log(socket);
       console.log('room');
       console.log(room);
       socket.to(room).emit('game over', status);
