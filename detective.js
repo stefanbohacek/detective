@@ -379,7 +379,7 @@ io.on('connection', function (socket) {
     data.message = data.message.replace(/(<([^>]+)>)/ig,"");
     if (data.message.length > 0){
       for (var i = 0, j = socket.rooms.length; i < j; i++){
-        socket.to(socket.rooms[i]).emit('game over', status);      
+        socket.to(socket.rooms[i]).emit('message received', data);
       }
     }
   });
