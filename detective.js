@@ -378,6 +378,8 @@ io.on('connection', function (socket) {
     }
     data.message = data.message.replace(/(<([^>]+)>)/ig,"");
     if (data.message.length > 0){
+      console.log('!!!!!!!!!!!!!!!!!!!socket');
+      console.log(socket);
       socket.rooms.forEach(function(room){
         socket.to(room).emit('message received', data);
       });      
