@@ -39,7 +39,7 @@ Interested in helping? Here's a few assorted notes (I am typing this fast to get
 1. First, make sure you have node.js installed and a MySQL server running.
 2. Go ahead and import the database `detective.sql` saved in the `db` folder.
 3. Make sure that you will be able to connect to the DB with this code:
-```
+```js
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
