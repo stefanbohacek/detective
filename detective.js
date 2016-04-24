@@ -406,45 +406,47 @@ io.on('connection', function (socket) {
     console.log(role);
     console.log(socket.handshake.session.detective_user);
 
-    connection.query('SELECT * from users WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"', function(err, rows, fields) {
-      if (!err){
-        if (rows.length > 0){
-          fetched_user = {
-            total_games: unescape(rows[0].total_games),
-            played_as_detective: unescape(rows[0].played_as_detective),
-            won_as_detective: unescape(rows[0].won_as_detective),
-            played_as_impostor: unescape(rows[0].played_as_impostor),
-            won_as_impostor: unescape(rows[0].won_as_impostor),
-          };
-          // console.log('fetched_user:');
-          // console.log(fetched_user);
 
-          switch(role){
-            case 'detective':
-              var updated_score = ', played_as_detective = ' + (parseInt(fetched_user.played_as_detective) + 1);
-                  updated_score += ', won_as_detective = ' + (parseInt(fetched_user.won_as_detective) + 1);
-            break;
-            case 'impostor':
-              var updated_score = ', played_as_impostor = ' + (parseInt(fetched_user.played_as_impostor) + 1);
-                  updated_score += ', won_as_impostor = ' + (parseInt(fetched_user.won_as_impostor) + 1);
-            break;
+    if (socket.handshake.session.detective_user){
+      connection.query('SELECT * from users WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"', function(err, rows, fields) {
+        if (!err){
+          if (rows.length > 0){
+            fetched_user = {
+              total_games: unescape(rows[0].total_games),
+              played_as_detective: unescape(rows[0].played_as_detective),
+              won_as_detective: unescape(rows[0].won_as_detective),
+              played_as_impostor: unescape(rows[0].played_as_impostor),
+              won_as_impostor: unescape(rows[0].won_as_impostor),
+            };
+            // console.log('fetched_user:');
+            // console.log(fetched_user);
+
+            switch(role){
+              case 'detective':
+                var updated_score = ', played_as_detective = ' + (parseInt(fetched_user.played_as_detective) + 1);
+                    updated_score += ', won_as_detective = ' + (parseInt(fetched_user.won_as_detective) + 1);
+              break;
+              case 'impostor':
+                var updated_score = ', played_as_impostor = ' + (parseInt(fetched_user.played_as_impostor) + 1);
+                    updated_score += ', won_as_impostor = ' + (parseInt(fetched_user.won_as_impostor) + 1);
+              break;
+            }
+
+            connection.query('UPDATE users SET total_games = ' + (parseInt(fetched_user.total_games) + 1) + updated_score + ' WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"',
+              function(err, info) {
+                if (err){
+                  console.log('Error while performing Query.');
+                  console.log(err);
+                }
+              });
           }
-
-          connection.query('UPDATE users SET total_games = ' + (parseInt(fetched_user.total_games) + 1) + updated_score + ' WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"',
-            function(err, info) {
-              if (err){
-                console.log('Error while performing Query.');
-                console.log(err);
-              }
-            });
         }
-      }
-      else{
-        console.log('Error while performing Query.');
-        console.log(err);
-      }
-    });
-
+        else{
+          console.log('Error while performing Query.');
+          console.log(err);
+        }
+      });
+    }
 
 
 
