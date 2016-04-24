@@ -153,7 +153,9 @@ app.get('/', function (req, res) {
     res.render('index', {
       banner_url: banner_url,
       // TODO: Find a better way to solve this!      
-      production_url_fix: process.env.NODE_ENV === 'production' ? '/detective' : ''
+      production_url_fix: process.env.NODE_ENV === 'production' ? '/detective' : '',
+      userIsLoggedIn: req.session.passport.user ? true : false,
+      userName: req.session.passport.user ? req.session.passport.user.username : null
     });
 });
 
