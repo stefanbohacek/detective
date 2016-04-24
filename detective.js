@@ -1,16 +1,54 @@
 require('newrelic');
 
-var express = require('express'),
+var config = require('./config'),
+    express = require('express'),
     exphbs  = require('express-handlebars'),
     http = require('http'),
     socketio = require('socket.io'),
+    cookieParser = require('cookie-parser'),
+    cookieSession = require('cookie-session'),
     mysql = require('mysql'),
     uuid = require('node-uuid'),
     moment = require('moment'),
     app = express(),
     server = http.Server(app),
     io = socketio.listen(server),
-    globalReq;
+    globalReq,
+    Session = require('express-session'),
+    SessionStore = require('session-file-store')(Session),
+    session = Session({store: new SessionStore({path: __dirname + '/tmp/sessions'}),
+                                               secret: config.secret,
+                                               resave: true,
+                                               saveUninitialized: true
+                      }),
+    passport = require('passport'),
+    TwitterStrategy = require('passport-twitter').Strategy;
+
+if (process.env.NODE_ENV === 'production'){
+  config.twitter.callbackURL = 'http://fourtonfish.com/detective/auth/twitter/callback';
+}
+
+passport.use(new TwitterStrategy(config.twitter,
+  function(token, tokenSecret, profile, cb) {
+    //console.log(profile.username);
+    // User.findOrCreate({ twitterId: profile.id }, function (err, user) {
+    //   return cb(err, user);
+    // });
+    return cb(null,profile);
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  // console.log('serializeUser');
+  // console.log(user.username);
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  // console.log('deserializeUser');
+  // console.log(obj.username);
+  done(null, obj);
+});
 
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -22,7 +60,7 @@ var connection = mysql.createConnection({
 
 var unassignedUsers = [],
     rooms = [],
-    loggingEnabled = false;
+    loggingEnabled = true;
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -91,19 +129,118 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
+app.use(session); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+//app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+app.get('/auth/twitter',
+  passport.authenticate('twitter'));
+
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/play');
+  });
+
 app.get('/', function (req, res) {
   var banner_url = 'images/art/detective.png';
   if (getRandomInt(0, 1) === 0){
     banner_url = 'images/art/detective-man.png'
   }
     res.render('index', {
-      banner_url: banner_url
+      banner_url: banner_url,
+      // TODO: Find a better way to solve this!      
+      production_url_fix: process.env.NODE_ENV === 'production' ? '/detective' : ''
     });
 });
 
 app.get('/play', function (req, res) {
   globalReq = req;
-  res.render('play');
+  if (req.session.passport.user){
+    console.log(req.session.passport.user.username);
+    console.log(req.session.passport.user.id);
+
+    var user = null;
+
+
+    connection.query('SELECT * from users WHERE service_uid = ' + req.session.passport.user.id, function(err, rows, fields) {
+      if (!err){
+        if (rows.length > 0){
+          user = {
+            service: unescape(rows[0].service),
+            service_uid: unescape(rows[0].service_uid),
+            user_id: unescape(rows[0].user_id),
+            user_name: unescape(rows[0].user_name),
+            total_games: unescape(rows[0].total_games),
+            played_as_detective: unescape(rows[0].played_as_detective),
+            won_as_detective: unescape(rows[0].won_as_detective),
+            played_as_impostor: unescape(rows[0].played_as_impostor),
+            won_as_impostor: unescape(rows[0].won_as_impostor),
+            date_joined: unescape(rows[0].date_joined)
+          };
+          console.log('user logged in...');
+          req.session.detective_user = user;
+          console.log(user);
+          if(user.user_name){
+            res.render('play', {
+              user_name: '@' + user.user_name
+            });
+          }
+          else{
+            res.render('play', { user_name: '' });
+          }
+        }
+        else{
+          console.log('new user');
+
+
+          console.log('req.session.passport.user.id');
+          console.log(req.session.passport.user.id);
+
+          connection.query('INSERT INTO users (service,service_uid,user_name,total_games,played_as_detective,won_as_detective,played_as_impostor,won_as_impostor,date_joined) VALUES ("twitter","' + req.session.passport.user.id + '","' + req.session.passport.user.username + '",0,0,0,0,0,now())',
+            function(err, info) {
+              if (!err){
+                console.log('new user saved!');
+                user = {
+                  user_id: info.insertId,
+                  service: "twitter",
+                  service_uid: req.session.passport.user.id,
+                  user_name: req.session.passport.user.username,
+                  total_games: 0,
+                  played_as_detective: 0,
+                  won_as_detective: 0,
+                  played_as_impostor: 0,
+                  won_as_impostor: 0,
+                };
+                console.log(user);
+                if(user.user_name){
+                  res.render('play', { user_name: '@' + user.user_name });
+                }
+                else{
+                  res.render('play', { user_name: '' });
+                }
+              }
+              else{
+                console.log('Error while performing Query.');
+                console.log(err);
+              }
+            });
+        }
+      }
+      else{
+        console.log('Error while performing Query.');
+        console.log(err);
+      }
+    });
+  }
+  else{
+    console.log('user not logged in');
+    res.render('play', { user_name: '' });
+    
+  }
 });
 
 app.get('/about', function (req, res) {
@@ -144,13 +281,67 @@ app.get('/log', function (req, res) {
   });
 });
 
+app.get('/leaderboard', function (req, res) {
+  var order_by = 'total_games',
+      sort = req.query.sort,
+      sortDetectives = false,
+      sortImpostors = false;
+
+  switch(req.query.sort){
+    case 'detective':
+      order_by = 'won_as_detective/played_as_detective';
+      sortDetectives = true;
+    break;
+    case 'imposter':
+    case 'impostor':
+      order_by = 'won_as_impostor/played_as_impostor';
+      sortImpostors = true;
+    break;
+  }
+
+  var exclude_from_leaderboard = ' WHERE 1 ';
+
+  if (process.env.NODE_ENV === 'production'){
+    exclude_from_leaderboard = ' WHERE user_name <> "fourtonfish" AND user_name <> "botwikidotorg" ';
+  }
+
+  connection.query('SELECT * from users' + exclude_from_leaderboard + 'ORDER BY ' + order_by + ' DESC', function(err, rows, fields) {
+    if (!err){
+      var data;
+      res.render('leaderboard', {
+          rows: rows,
+          sortDetectives: sortDetectives,
+          sortImpostors: sortImpostors
+      });        
+
+    }
+    else{
+      console.log('Error while performing Query.');
+      console.log(err);
+    }
+  });
+});
+
 app.use(express.static(__dirname + '/public'));
 
 server.listen(3003, function(){
   console.log('Express server listening on port 3003');
 });
 
+var ios = require('socket.io-express-session');
+
+io.use(ios(session));
+
+
+
 io.on('connection', function (socket) {
+  try{
+    console.log('Connected as:');
+    console.log(socket.handshake.session.passport.user.username);
+  }
+  catch(err){
+    console.log(err);
+  }
   if (getRandomInt(0, 2) !== 0){
 // This is for testing, replace the line above.
 //  if (1 === 0){
@@ -194,9 +385,117 @@ io.on('connection', function (socket) {
   });
 
   socket.on('game over', function(status){
-      socket.rooms.forEach(function(room){
-        socket.to(room).emit('game over', status);
-      });
+    console.log('game over...');
+    socket.rooms.forEach(function(room){
+      console.log('room');
+      console.log(room);
+      socket.to(room).emit('game over', status);
+    });
+  });
+
+  socket.on('I won', function(role){
+    console.log('########################WINNER############');
+    console.log(role);
+    console.log(socket.handshake.session.detective_user);
+
+    connection.query('SELECT * from users WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"', function(err, rows, fields) {
+      if (!err){
+        if (rows.length > 0){
+          fetched_user = {
+            total_games: unescape(rows[0].total_games),
+            played_as_detective: unescape(rows[0].played_as_detective),
+            won_as_detective: unescape(rows[0].won_as_detective),
+            played_as_impostor: unescape(rows[0].played_as_impostor),
+            won_as_impostor: unescape(rows[0].won_as_impostor),
+          };
+          // console.log('fetched_user:');
+          // console.log(fetched_user);
+
+          switch(role){
+            case 'detective':
+              var updated_score = ', played_as_detective = ' + (parseInt(fetched_user.played_as_detective) + 1);
+                  updated_score += ', won_as_detective = ' + (parseInt(fetched_user.won_as_detective) + 1);
+            break;
+            case 'impostor':
+              var updated_score = ', played_as_impostor = ' + (parseInt(fetched_user.played_as_impostor) + 1);
+                  updated_score += ', won_as_impostor = ' + (parseInt(fetched_user.won_as_impostor) + 1);
+            break;
+          }
+
+          connection.query('UPDATE users SET total_games = ' + (parseInt(fetched_user.total_games) + 1) + updated_score + ' WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"',
+            function(err, info) {
+              if (err){
+                console.log('Error while performing Query.');
+                console.log(err);
+              }
+            });
+        }
+      }
+      else{
+        console.log('Error while performing Query.');
+        console.log(err);
+      }
+    });
+
+
+
+
+
+
+  });
+
+  socket.on('I lost', function(role){
+    console.log('#########################LOSER############');
+    console.log(role);
+    console.log(socket.handshake.session.detective_user);
+
+
+
+
+
+    connection.query('SELECT * from users WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"', function(err, rows, fields) {
+      if (!err){
+        if (rows.length > 0){
+          fetched_user = {
+            total_games: unescape(rows[0].total_games),
+            played_as_detective: unescape(rows[0].played_as_detective),
+            played_as_impostor: unescape(rows[0].played_as_impostor),
+          };
+          // console.log('fetched_user:');
+          // console.log(fetched_user);
+
+          switch(role){
+            case 'detective':
+              var updated_score = ', played_as_detective = ' + (parseInt(fetched_user.played_as_detective) + 1);
+            break;
+            case 'impostor':
+              var updated_score = ', played_as_detective = ' + (parseInt(fetched_user.played_as_impostor) + 1);
+            break;
+          }
+
+          connection.query('UPDATE users SET total_games = ' + (parseInt(fetched_user.total_games) + 1) + updated_score + ' WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"',
+            function(err, info) {
+              if (err){
+                console.log('Error while performing Query.');
+                console.log(err);
+              }
+            });
+        }
+      }
+      else{
+        console.log('Error while performing Query.');
+        console.log(err);
+      }
+    });
+
+
+
+
+
+
+
+
+
   });
 
   socket.on('save_chat_log', function(chatLog, userRole){

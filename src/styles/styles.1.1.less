@@ -1,10 +1,10 @@
 @white: #fff;
-@dark: #434A54;
+@dark: #38313a;
 @darker: @dark - #111;
 @darkest: @darker - #222;
 @green: #48CFAD;
 @highlight: #FC6E51;
-@link-color: #3498db;
+@link-color: #fff;
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -17,23 +17,35 @@ body{
   font-size: 1.2em;
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
 }
 section{
-  max-width: 960px;
   min-height: 100%;
   margin: 0 auto;
   padding: 10px;
+  max-width: 1200px;
 }
 section#main{
-  padding-bottom: 100px;  
+  padding-bottom: 2em;  
+}
+section#about{
+  margin-top: 2em;
+}
+section.chat-wrapper{
+  max-width: 100%;
+  padding: 0; 
+}
+table{
+  width: 100%;
+}
+th{
+  text-align: left;
 }
 form{
 }
 input[type="text"],
 button{
   font-family: 'Merriweather Sans';
-  max-width: 960px;
   margin: 0 auto;
   padding: 10px;
   font-size: 0.8em;
@@ -68,7 +80,7 @@ div#instructions-wrapper{
   text-align: center;
 }
 p#instructions{
-  margin: 0 auto;
+  margin: 2em auto;
   text-align: left;
   width: 100%;
 }
@@ -88,9 +100,18 @@ button#dismiss-instructions{
   max-width: 300px;
   margin: 0 auto;
 }
+button#send-message{
+  font-size: 1em;
+  width: 20%;
+  @media (max-width: 800px){
+    padding: 0;
+    font-size: 0.8em;
+  }
+}
 a.primary-button{
   border: 1px solid @white;
   padding: 20px;
+  margin: 0 10px;
 }
 a.primary-button,
 a.secondary-button{
@@ -122,7 +143,9 @@ section#about h2{
 span.highlight{
   font-weight: bold;
 }
+.note,
 p.definition{
+  font-style: italic;
   margin-top: 2em;
   font-size: 0.8em;
 }
@@ -143,6 +166,11 @@ section#intro img{
   max-height: 70vw;
   margin: 0 auto;
 }
+section#intro img.twitter-icon{
+  display: inline;
+  max-width: 1.2em;
+  vertical-align: middle;
+}
 form#tip-me{
   position: static;
 }
@@ -160,7 +188,7 @@ form#tip-me button{
   height: auto;
 }
 div#messages-wrapper{
-  padding-bottom: 2em;
+  padding-bottom: 4em;
 }
 ul#messages{
   font-family: 'Merriweather Sans';
@@ -170,7 +198,7 @@ ul#messages{
 }
 ul#messages li{
   word-wrap: break-word;
-  padding: 10px 5px;
+  padding: 20px 20px 20px 40px;
   background: @white;
   color: @dark;
   font-style: italic;
@@ -178,12 +206,12 @@ ul#messages li{
 ul#messages li.user-message{
   background: @dark;
   color: @white;
-  padding: 20px 5px;
+  padding: 20px 20px 20px 40px;
 }
 ul#messages li.system-message{
   background: @dark;
   color: @highlight;
-  padding: 20px 5px;
+  padding: 20px 20px 20px 40px;
   font-weight: bold;
 }
 ul#messages li.rori-message{
@@ -239,6 +267,7 @@ footer.footer{
   padding-bottom: 2em;
 }
 div#more-info{
+  font-weight: bold;
   padding: 10px;
   font-size: 0.8em;
   min-height: 3em;
@@ -251,10 +280,10 @@ ul.navigation-menu{
 ul.navigation-menu li{
   list-style: none;
   margin: 0;
-  padding: 1em 0.8em;
-}
-ul.navigation-menu li a{
-  text-decoration: none;
+  padding: 0.5em;
+  @media (max-width: 800px){
+    padding: 1em 0.5em;
+  }
 }
 a.back-to-top{
   text-decoration: none;
@@ -265,8 +294,6 @@ p.btc-address{
 @media (min-width: 800px){
   ul.navigation-menu li{
     display: inline;
-    margin: 2em 0 !important;
-    padding: 2em 0 !important; 
   }
 }
 @media (max-width: 800px){
@@ -282,6 +309,7 @@ p.btc-address{
   }
 }
 .shifted,
+.shifted-short,
 .shifted-1,
 .unshifted,
 .unshifted-1,
@@ -290,16 +318,20 @@ p.btc-address{
 .hidden,
 .share-link-shifted,
 .share-link-unshifted,
-form#message-form{
-  transition: all 1s;
-}
+form#message-form,
 .share-link-unshifted{
-  transition: all 0.7s;
+  transition: all 0.6s;
 }
+
+.shifted-short{
+  transform: translate(0, 10px);
+  opacity: 0;
+}
+
 .shifted-1,
 .shifted,
 .hidden{
-  transform: translate(0, 250px);
+  transform: translate(0, 50px);
   opacity: 0;
 }
 .shifted-1,
@@ -346,6 +378,7 @@ ul.share-buttons li a{
 
 ul#share-buttons-game{
   position: fixed;
+  left: 30px;
   bottom: 3em;
   list-style: none;
   padding: 0;
@@ -372,12 +405,15 @@ img{
 }
 .example-game{
   margin: 2em auto;
+  li.user-message{
+    padding: 1em !important;
+  }
 }
 hr{
-  margin-top: 2em;
-  width: 70%;
-  border-top: 1px solid @white;
-  border-bottom: 1px solid @dark;
+  margin: 2em;
+  width: 90%;
+  border-top: 1px solid @dark + #222;
+  border-bottom: none;
   border-left: 0;
   border-right: 0;
 }

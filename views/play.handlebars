@@ -1,12 +1,20 @@
 <header>
   <div id="more-info" class="shifted hidden">
-    You are playing <a href="http://blog.fourtonfish.com/tagged/detective" target="_blank">Detective</a> by
-    <a href="https://twitter.com/fourtonfish" target="_blank">@fourtonfish</a> as <span id="role-reminder"></span>. Powered by <a href="https://www.botlibre.com/" target="_blank">BOT libre</a>.<!-- <a id="request-notification-permission" href="#" title="Click here to enable notifications in supported browsers">Enable notifications</a>-->
+    You are
+     {{#if user_name }}
+       <strong>{{ user_name }}</strong>,
+     {{/if}}
+    playing <a href="https://botwiki.org/projects/#detective" target="_blank">Detective</a> by
+    <a href="https://twitter.com/fourtonfish" target="_blank">@fourtonfish</a> as <span id="role-reminder"></span>. See <a href="{{production_url_fix}}/leaderboard?sort=impostor" target="_blank">the leaderboard</a>.<!-- <a id="request-notification-permission" href="#" title="Click here to enable notifications in supported browsers">Enable notifications</a>-->
   </div>
 </header>
-<section id="main">
+<section id="main" class="chat-wrapper">
   <div id="instructions-wrapper">
-    <h1 id="loading" class="shifted-1">Waiting for a new connection...</h1>
+    <h1 id="loading" class="shifted-1">
+     {{#if user_name }}
+       {{ user_name }},
+     {{/if}}
+    waiting for a new connection...</h1>
     <!--
     <img src="images/art/machine.png" class="shifted-1" title="Some kind of a machine">
     -->
@@ -47,4 +55,4 @@ http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-n
 </section>
 <script src="libs/socket.io.js"></script>
 <script src="libs/xml2json.js"></script>
-<script src="js/scripts.1.6.min.js"></script>
+<script src="js/scripts.1.7.min.js"></script>

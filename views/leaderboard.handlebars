@@ -1,0 +1,45 @@
+<header class="header">
+  <h1 class="highlight">Leaderboard</h1>
+</header>
+
+<section id="leaderboard">
+{{#if sortDetectives}}
+  <p>Sorting players by best Detectives, <a href="/leaderboard?sort=impostor">see best Impostors</a>.</p>
+{{else if sortImpostors}}
+  <p>Sorting players by best Impostors, <a href="/leaderboard?sort=detective">see best Detectives</a>.</p>
+{{else}}
+  <p>Sort the players by <a href="/leaderboard?sort=impostor">best Impostors</a> or <a href="/leaderboard?sort=detective">best Detectives</a>.</p>
+{{/if}}
+<p class="note">Note: The leaderboard is an experimental feature and results <strong>might be reset</strong> during development. In the future, the leaderboard should be reset on a weekly basis.</p>
+<hr/>
+<table id="leaderboard-table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th class="center-text">Total games</th>
+      <th class="center-text">Games as Detective</th>
+      <th class="center-text">Won as Detective</th>
+      <th class="center-text">Games as Impostor</th>
+      <th class="center-text">Won as Impostor</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each rows}}
+    <tr class="shifted-short">
+      <td><a href="https://twitter.com/{{this.user_name}}">@{{this.user_name}}</a></td>
+      <td class="center-text">{{this.total_games}}</td>
+      <td class="center-text">{{this.played_as_detective}}</td>
+      <td class="center-text">{{this.won_as_detective}}</td>
+      <td class="center-text">{{this.played_as_impostor}}</td>
+      <td class="center-text">{{this.won_as_impostor}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+<hr/>
+</section>
+<footer class="footer">
+  <p class="center-text"><span class="highlight">DETECTIVE</span> is a <a target="_blank" href="https://botwiki.org/projects/#detective">Botwiki project</a>, please consider <a href="https://botwiki.org/about/support#donation-options" target="_blank">supporting it</a>!<br/>
+  Created by <a href="https://twitter.com/fourtonfish">@fourtonfish</a>. Return <a href="..">to the main page</a>.</p>
+</footer>
+<script src="js/leaderboard.min.js"></script>

@@ -5,14 +5,14 @@
 </header>
   <ul class="navigation-menu shifted">
     <li>
-      <a href="/detective/play" class="primary-button shifted">Play the game</a>
+      <a href="{{production_url_fix}}/auth/twitter" class="primary-button shifted"><img class="twitter-icon" src="images/twitter.svg"> Login and play</a>
     </li>
-<!--
-  Coming soon!
     <li>
-      <a href="#" class="secondary-button shifted">Login</a>
+      <a href="{{production_url_fix}}/play" class="secondary-button shifted">Play</a>
     </li>
--->
+    <li>
+      <a href="{{production_url_fix}}/leaderboard?sort=impostor" class="secondary-button shifted">Leaderboard</a>
+    </li>
     <li>
       <a href="#about" class="secondary-button shifted">About</a>
     </li>
@@ -37,60 +37,41 @@
     </li>
   </ul>
   <h2 id="about-game" class="shifted">What is <span class="highlight">DETECTIVE</span>?</h2>
-  <p class="shifted"><span class="highlight">DETECTIVE</span> is a "chat game" where the player gets randomly paired with either <strong>another player</strong> or <strong>an automated chat bot</strong>, powered by <a href="https://www.botlibre.com/">BOT Libre</a> (<strong>ROBOT</strong>). You will also be randomly assigned a role of either a <strong>DETECTIVE</strong> or an <strong>IMPOSTOR</strong>.</p>
+  
+  <p class="shifted"><span class="highlight">DETECTIVE</span> is a "reverse-Turing test" chat game where the player gets randomly paired with either <strong>another player</strong> or <strong>an automated chat bot</strong> (<strong>ROBOT</strong>, powered by <a href="https://www.botlibre.com/">BOT Libre</a>). Human players will be randomly assigned a role of either a <strong>DETECTIVE</strong> or an <strong>IMPOSTOR</strong>.</p>
+  
+  <p class="shifted">As a <strong>DETECTIVE</strong>, you must figure out whether you are speaking with a <strong>ROBOT</strong> (the chat bot) or an <strong>IMPOSTOR</strong>, another human player pretending to be a <strong>ROBOT</strong>.</p>
+  
+  <p class="shifted">If you are an <strong>IMPOSTOR</strong>, you must trick the <strong>DETECTIVE</strong> into thinking that they are speaking to a <strong>ROBOT</strong>.</p>
   <div class="example-game shifted">
     <div class="shadow ">
       <ul id="messages"><li class="user-message new-message">What is the answer to the math question of 2+2?</li><li class="rori-message new-message"><span class="message-prepend">&gt;</span> it depends on how you phrase the question</li><li class="user-message new-message">You are an imposter</li><li class="system-message error-message">INCORRECT</li><li class="system-message new-message">Game is over</li></ul>
     </div>
     <em><a href="http://fourtonfish.com/detective/log?id=415">An example game.</a></em>
   </div>
-  <p class="shifted">As a <strong>DETECTIVE</strong>, you must figure out whether you are speaking with a <strong>ROBOT</strong> (the chat bot) or an <strong>IMPOSTOR</strong>, another human player pretending to be a <strong>ROBOT</strong>.
-  <p class="shifted">If you are an <strong>IMPOSTOR</strong>, you must trick the <strong>DETECTIVE</strong> into thinking that they are speaking to a <strong>ROBOT</strong>.</p>
+
   <div class="img-block">
     <img class="shifted" src="images/art/robot.png" title="A scuba diver pretending to be a robot">
   </div>
-  <p class="shifted">An <strong>upcoming feature</strong> will add a <strong>scoring system</strong> that shows how many times you <strong>uncovered an IMPOSTOR</strong> and how many times you <strong>deceived a DETECTIVE</strong>.</p>
-  <p class="shifted">If you'd like to learn more about the game, check out <a href="http://blog.fourtonfish.com/tagged/detective">related posts on my blog</a>. You can also <a href="https://twitter.com/fourtonfish">follow me on Twitter</a> for updates.</p>
+  
+  <p class="shifted">You have an option to <strong>sign in using your Twitter account</strong> to record the number of games you played in each role and your success rate. You can see how all players are doing in this game in the <a href="{{production_url_fix}}/leaderboard?sort=impostor">public leaderboard</a>.</p> 
+
+  
+  <p class="shifted">This game is now a <a target="_blank" href="https://botwiki.org/projects/#detective">Botwiki project</a> (here's how you can <a href="https://botwiki.org/about/support/" target="_blank">support it</a>). If you'd like to learn more about the game, check out <a href="http://blog.fourtonfish.com/tagged/detective">related posts on my blog</a>. You can also <a href="https://twitter.com/fourtonfish">follow me on Twitter</a> for updates.</p>
   <a href="#top" class="shifted back-to-top"><i class="fa fa-chevron-up"></i> Back to top</a>
   <h2 id="about-author" class="shifted">Who am I?</h2>
-  <p class="shifted">Hi, my name is <a href="http://fourtonfish.com/">Stefan</a> and I am a <strong>web developer</strong> living in <strong>Brooklyn, New York</strong>. I am the creator and currently the only developer of <span class="highlight">DETECTIVE</span>. I also made things like <a href="http://fourtonfish.com/message/">/message</a> or the <a href="http://simplesharingbuttons.com/">Simple Sharing Buttons Generator</a>.</p>
+  
+  <p class="shifted">Hi, my name is <a href="https:/twitter.com/fourtonfish">Stefan</a> and I am a <strong>web developer</strong> living in <strong>Brooklyn, New York</strong>. I am the creator of <span class="highlight">DETECTIVE</span>, and I also made things like <a href="http://fourtonfish.com/message/">/message</a>, the <a href="http://simplesharingbuttons.com/">Simple Sharing Buttons Generator</a>, or <a href="https://botwiki.org/">Botwiki</a>, a catalog of friendly online bots.</p>
+  
   <p class="shifted">If you'd like to get in touch, feel free to <a href="mailto:stefan@fourtonfish.com">send me an email</a> on <a href="https://twitter.com/fourtonfish">reach out to me on Twitter</a>.</p>
   <a href="#top" class="shifted back-to-top"><i class="fa fa-chevron-up"></i> Back to top</a>
   <h2 id="privacy-policy" class="shifted">Privacy policy</h2>
-  <p class="shifted">None of the conversations are saved on my server -- unless <strong>either of the human players click on one of the sharing buttons after the game is over</strong>. This saves the chat log into the database and generates a link to a page that can be shared, <a href="http://fourtonfish.com/detective/log?id=274">like this one</a>. Chat logs <strong>between a human player and the <strong>ROBOT</strong> are saved by</strong> <a href="https://www.botlibre.com/">BOT Libre</a> (<a href="https://www.botlibre.com/privacy.jsp">link to their Privacy Policy page</a>). I myself browse the chat logs to <strong>help train the chat bot</strong> so that his answers can appear more human-like.</p>
+  
+  <p class="shifted">None of the conversations are saved on my server -- unless <strong>either of the human players click on one of the sharing buttons after the game is over</strong>. This saves the chat log into the database and generates a link to a page that can be shared, <a href="http://fourtonfish.com/detective/log?id=274">like this one</a>. Chat logs <strong>between the human players and the <strong>ROBOT</strong> are saved by</strong> <a href="https://www.botlibre.com/">BOT Libre</a> (<a href="https://www.botlibre.com/privacy.jsp">link to their Privacy Policy page</a>). I myself occasionally browse those chat logs to <strong>help train the chat bot</strong> so that his answers can appear more human-like.</p>
+  <p class="shifted">If you choose to sign in using your Twitter account, note that no private or public information is stored on my server, other than your user name and your progress in the game. If you'd like to removed from the leaderboard, please <a href="https://twitter.com/fourtonfish">contact me directly on Twitter</a>, so that I can verify your identity.</p>  
   <div class="img-block">
     <img class="shifted" src="images/art/polar-clock.png" title="Something called 'polar clock'">
   </div>
   <a href="#top" class="shifted back-to-top"><i class="fa fa-chevron-up"></i> Back to top</a>
-  <h2 id="support" class="shifted">Support your developer</h2>
-  <p class="shifted"></p>
-  <form class="shifted" id="tip-me" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="hosted_button_id" value="6WUY9E5QLB4RE">
-    This game is and will remain <strong>completely free</strong>, but I don't mind if you<br/>
-    <ul>
-      <li><input type="hidden" name="on0" value="Send me">send me<select name="os0" class="tip-choice">
-          <option value="a dollar ->">a dollar</option>
-          <option value="two dollars ->">two dollars</option>
-          <option value="five bucks ->">five bucks</option>
-          </select>
-          <input type="hidden" name="currency_code" value="USD">
-          <button name="submit" title="Send via PayPal"><strong>Send</strong> via <i class="fa fa-cc-paypal"></i></button>
-          <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-      </li>
-      <li>
-        <p>or perhaps <i class="fa fa-btc"></i> 0.02?</p>
-        <a href="bitcoin:1MmGNm8ePPA2GhBKRUGHZE97CHRGVrQDcL?amount=0.02&label=DETECTIVE" title="BITCOINS!">
-        <div class="img-block">
-          <img src="images/bitcoin-donation.png"></a>
-        </div>
-        <p class="btc-address">1MmGNm8ePPA2GhBKRUGHZE97CHRGVrQDcL</p>
-      </li>
-    </ul>
-  </form>
-  <p class="shifted"><strong>Thank you</strong> either way :-)</p>
 </section>
-<footer class="footer shifted">
-  <p class="center-text"><a href="http://fourtonfish.com/detective/play">PLAY THE GAME</a> or <a href="http://blog.fourtonfish.com/tagged/detective">learn more</a></p>
-</footer>
 <script src="js/log.min.js"></script>

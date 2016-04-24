@@ -572,10 +572,12 @@ function containsOffensiveLanguage(text){
       if (detectiveGuess === partnerRole){
         addMessage('system', 'CORRECT');
         globalSocket.emit('game over', 'detective won');
+        globalSocket.emit('I won', 'detective');        
       }
       else{
         addMessage('system', 'INCORRECT');
         globalSocket.emit('game over', 'detective lost');
+        globalSocket.emit('I lost', 'detective');        
       }
       addMessage('system', 'Game is over');
       showSharingButtons();
@@ -641,7 +643,7 @@ function containsOffensiveLanguage(text){
     }
 
     if (messageText === 'Game is over' && messageFrom === 'system'){
-      newMessage.innerHTML += '<p style="color: #fff !important;">PS: This game is now <a target="_blank" href="https://github.com/botwiki/detective/">open source</a>!</p>';
+      newMessage.innerHTML += '<p style="color: #fff !important;">DETECTIVE is a <a target="_blank" href="https://botwiki.org/projects/#detective">Botwiki project</a>, please consider <a href="https://botwiki.org/about/support/" target="_blank">supporting it</a>!</p>';
     }
 
 
@@ -809,9 +811,11 @@ function containsOffensiveLanguage(text){
   socket.on('game over', function(status) {
     if (status === 'detective won'){
       addMessage('system', 'YOU HAVE BEEN REVEALED');
+      globalSocket.emit('I lost', 'impostor');
     }
     else{
       addMessage('system', 'YOU FOOLED THE DETECTIVE');      
+      globalSocket.emit('I won', 'impostor');
     }
     addMessage('system', 'Game is over');
     showSharingButtons();
