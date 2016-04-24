@@ -379,18 +379,18 @@ io.on('connection', function (socket) {
     }
     data.message = data.message.replace(/(<([^>]+)>)/ig,"");
     if (data.message.length > 0){
-      for (var i = 0, j = socket.rooms.length; i < j; i++){
-        console.log(socket.rooms[i]);
-        socket.to(socket.rooms[i]).emit('message received', data);
+      for (var room in socket.rooms) {
+        console.log(socket.rooms[room]);
+        socket.to(socket.rooms[room]).emit('message received', data);  
       }
     }
   });
 
   socket.on('game over', function(status){
     console.log('game over...');
-    for (var i = 0, j = socket.rooms.length; i < j; i++){
-      console.log(socket.rooms[i]);
-      socket.to(socket.rooms[i]).emit('game over', status);      
+    for (var room in socket.rooms) {
+      console.log(socket.rooms[room]);
+      socket.to(socket.rooms[room]).emit('game over', status);  
     }
   });
 
