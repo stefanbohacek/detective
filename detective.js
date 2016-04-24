@@ -374,6 +374,7 @@ io.on('connection', function (socket) {
   socket.on('send message', function(data){
     if (loggingEnabled === true){
       console.log('message received:');
+      console.log(socket.rooms);
       console.log(data);
     }
     data.message = data.message.replace(/(<([^>]+)>)/ig,"");
