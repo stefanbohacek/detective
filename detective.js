@@ -245,6 +245,11 @@ app.get('/play', function (req, res) {
   }
 });
 
+app.get('/logout', function (req, res) {
+  req.session.destroy();
+  res.redirect('/detective/');
+});
+
 app.get('/about', function (req, res) {
   res.render('about');
 });
