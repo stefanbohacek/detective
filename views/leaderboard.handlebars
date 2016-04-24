@@ -4,9 +4,9 @@
 
 <section id="leaderboard">
 {{#if sortDetectives}}
-  <p>Sorting players by best Detectives, <a href="/leaderboard?sort=impostor">see best Impostors</a>.</p>
+  <p>Sorting players by best Detectives, <a href="/detective/leaderboard?sort=impostor">see best Impostors</a>.</p>
 {{else if sortImpostors}}
-  <p>Sorting players by best Impostors, <a href="/leaderboard?sort=detective">see best Detectives</a>.</p>
+  <p>Sorting players by best Impostors, <a href="/detective/leaderboard?sort=detective">see best Detectives</a>.</p>
 {{else}}
   <p>Sort the players by <a href="/leaderboard?sort=impostor">best Impostors</a> or <a href="/leaderboard?sort=detective">best Detectives</a>.</p>
 {{/if}}
