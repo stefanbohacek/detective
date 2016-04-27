@@ -404,8 +404,6 @@ io.on('connection', function (socket) {
   socket.on('I won', function(role){
     console.log('########################WINNER############');
     console.log(role);
-    console.log(socket.handshake.session.detective_user);
-
 
     if (socket.handshake.session.detective_user){
       connection.query('SELECT * from users WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"', function(err, rows, fields) {
@@ -418,8 +416,8 @@ io.on('connection', function (socket) {
               played_as_impostor: unescape(rows[0].played_as_impostor),
               won_as_impostor: unescape(rows[0].won_as_impostor),
             };
-            // console.log('fetched_user:');
-            // console.log(fetched_user);
+            console.log('fetched_user:');
+            console.log(fetched_user);
 
             switch(role){
               case 'detective':
@@ -457,7 +455,6 @@ io.on('connection', function (socket) {
   socket.on('I lost', function(role){
     console.log('#########################LOSER############');
     console.log(role);
-    console.log(socket.handshake.session.detective_user);
 
 
     if (socket.handshake.session.detective_user){
@@ -469,8 +466,8 @@ io.on('connection', function (socket) {
               played_as_detective: unescape(rows[0].played_as_detective),
               played_as_impostor: unescape(rows[0].played_as_impostor),
             };
-            // console.log('fetched_user:');
-            // console.log(fetched_user);
+            console.log('fetched_user:');
+            console.log(fetched_user);
 
             switch(role){
               case 'detective':
