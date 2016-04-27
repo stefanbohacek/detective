@@ -296,12 +296,12 @@ app.get('/leaderboard', function (req, res) {
 
   switch(req.query.sort){
     case 'detective':
-      order_by = 'won_as_detective/played_as_detective';
+      order_by = 'won_as_detective/played_as_detective DESC, played_as_detective DESC';
       sortDetectives = true;
     break;
     case 'imposter':
     case 'impostor':
-      order_by = 'won_as_impostor/played_as_impostor';
+      order_by = 'won_as_impostor/played_as_impostor DESC, played_as_impostor DESC';
       sortImpostors = true;
     break;
   }
@@ -312,7 +312,7 @@ app.get('/leaderboard', function (req, res) {
     exclude_from_leaderboard = ' WHERE user_name <> "fourtonfish" AND user_name <> "botwikidotorg" ';
   }
 
-  connection.query('SELECT * from users' + exclude_from_leaderboard + 'ORDER BY ' + order_by + ' DESC, total_games DESC', function(err, rows, fields) {
+  connection.query('SELECT * from users' + exclude_from_leaderboard + 'ORDER BY ' + order_by, function(err, rows, fields) {
     if (!err){
       var data;
       res.render('leaderboard', {
