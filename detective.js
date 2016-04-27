@@ -484,7 +484,7 @@ io.on('connection', function (socket) {
               break;
             }
 
-            connection.query('UPDATE users SET total_games = ' + (fetched_user.total_games + 1) + updated_score + ' WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"',
+            connection.query('UPDATE users SET total_games = ' + (fetched_user.total_games + 1) + updated_score + ' WHERE user_name = "' + fetched_user.user_name + '"',
               function(err, info) {
                 if (err){
                   console.log('Error while performing Query.');
