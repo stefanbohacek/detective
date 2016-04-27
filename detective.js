@@ -296,12 +296,12 @@ app.get('/leaderboard', function (req, res) {
 
   switch(req.query.sort){
     case 'detective':
-      order_by = 'won_as_detective/played_as_detective DESC, played_as_detective DESC';
+      order_by = 'won_as_detective/played_as_detective DESC, won_as_detective DESC';
       sortDetectives = true;
     break;
     case 'imposter':
     case 'impostor':
-      order_by = 'won_as_impostor/played_as_impostor DESC, played_as_impostor DESC';
+      order_by = 'won_as_impostor/played_as_impostor DESC, won_as_impostor DESC';
       sortImpostors = true;
     break;
   }
