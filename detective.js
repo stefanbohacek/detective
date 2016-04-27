@@ -172,16 +172,16 @@ app.get('/play', function (req, res) {
       if (!err){
         if (rows.length > 0){
           user = {
-            service: unescape(rows[0].service),
-            service_uid: unescape(rows[0].service_uid),
-            user_id: unescape(rows[0].user_id),
-            user_name: unescape(rows[0].user_name),
-            total_games: unescape(rows[0].total_games),
-            played_as_detective: unescape(rows[0].played_as_detective),
-            won_as_detective: unescape(rows[0].won_as_detective),
-            played_as_impostor: unescape(rows[0].played_as_impostor),
-            won_as_impostor: unescape(rows[0].won_as_impostor),
-            date_joined: unescape(rows[0].date_joined)
+            service: rows[0].service,
+            service_uid: rows[0].service_uid,
+            user_id: rows[0].user_id,
+            user_name: rows[0].user_name,
+            total_games: rows[0].total_games,
+            played_as_detective: rows[0].played_as_detective,
+            won_as_detective: rows[0].won_as_detective,
+            played_as_impostor: rows[0].played_as_impostor,
+            won_as_impostor: rows[0].won_as_impostor,
+            date_joined: rows[0].date_joined
           };
           console.log('user logged in...');
           req.session.detective_user = user;
@@ -410,27 +410,28 @@ io.on('connection', function (socket) {
         if (!err){
           if (rows.length > 0){
             fetched_user = {
-              total_games: unescape(rows[0].total_games),
-              played_as_detective: unescape(rows[0].played_as_detective),
-              won_as_detective: unescape(rows[0].won_as_detective),
-              played_as_impostor: unescape(rows[0].played_as_impostor),
-              won_as_impostor: unescape(rows[0].won_as_impostor),
+              user_name: parseInt(rows[0].user_name),
+              total_games: parseInt(rows[0].total_games),
+              played_as_detective: parseInt(rows[0].played_as_detective),
+              won_as_detective: parseInt(rows[0].won_as_detective),
+              played_as_impostor: parseInt(rows[0].played_as_impostor),
+              won_as_impostor: parseInt(rows[0].won_as_impostor)
             };
             console.log('fetched_user:');
             console.log(fetched_user);
 
             switch(role){
               case 'detective':
-                var updated_score = ', played_as_detective = ' + (parseInt(fetched_user.played_as_detective) + 1);
-                    updated_score += ', won_as_detective = ' + (parseInt(fetched_user.won_as_detective) + 1);
+                var updated_score = ', played_as_detective = ' + (fetched_user.played_as_detective + 1);
+                    updated_score += ', won_as_detective = ' + (fetched_user.won_as_detective + 1);
               break;
               case 'impostor':
-                var updated_score = ', played_as_impostor = ' + (parseInt(fetched_user.played_as_impostor) + 1);
-                    updated_score += ', won_as_impostor = ' + (parseInt(fetched_user.won_as_impostor) + 1);
+                var updated_score = ', played_as_impostor = ' + (fetched_user.played_as_impostor + 1);
+                    updated_score += ', won_as_impostor = ' + (fetched_user.won_as_impostor + 1);
               break;
             }
 
-            connection.query('UPDATE users SET total_games = ' + (parseInt(fetched_user.total_games) + 1) + updated_score + ' WHERE user_name = "' + socket.handshake.session.detective_user.user_name + '"',
+            connection.query('UPDATE users SET total_games = ' + (fetched_user.total_games + 1) + updated_score + ' WHERE user_name = "' + fetched_user.user_name + '"',
               function(err, info) {
                 if (err){
                   console.log('Error while performing Query.');
@@ -462,9 +463,9 @@ io.on('connection', function (socket) {
         if (!err){
           if (rows.length > 0){
             fetched_user = {
-              total_games: unescape(rows[0].total_games),
-              played_as_detective: unescape(rows[0].played_as_detective),
-              played_as_impostor: unescape(rows[0].played_as_impostor),
+              total_games: rows[0].total_games,
+              played_as_detective: rows[0].played_as_detective,
+              played_as_impostor: rows[0].played_as_impostor
             };
             console.log('fetched_user:');
             console.log(fetched_user);
