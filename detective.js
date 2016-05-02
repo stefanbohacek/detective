@@ -304,6 +304,8 @@ app.get('/leaderboard', function (req, res) {
       order_by = 'won_as_impostor/played_as_impostor DESC, won_as_impostor DESC';
       sortImpostors = true;
     break;
+    default:
+      order_by = 'total_games DESC';
   }
 
   var exclude_from_leaderboard = ' WHERE 1 ';
