@@ -17,9 +17,13 @@
     <tr>
       <th>User</th>
       <th class="center-text">Total games</th>
+<!--
       <th class="center-text">Games as Detective</th>
+-->
       <th class="center-text">Won as Detective</th>
+<!--
       <th class="center-text">Games as Impostor</th>
+-->
       <th class="center-text">Won as Impostor</th>
     </tr>
   </thead>
@@ -28,9 +32,13 @@
     <tr class="shifted-short">
       <td><a href="https://twitter.com/{{this.user_name}}">@{{this.user_name}}</a></td>
       <td class="center-text">{{this.total_games}}</td>
+<!--
       <td class="center-text">{{this.played_as_detective}}</td>
+-->
       <td class="center-text">{{this.won_as_detective}}</td>
+<!--
       <td class="center-text">{{this.played_as_impostor}}</td>
+-->
       <td class="center-text">{{this.won_as_impostor}}</td>
     </tr>
   {{/each}}
