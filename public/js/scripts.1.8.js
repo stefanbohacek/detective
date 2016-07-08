@@ -384,7 +384,6 @@ function containsOffensiveLanguage(text){
 
   function shareChatLog(){
     shareChatLogModule.service = shareTarget.getAttribute('data-service');
-    console.log(shareChatLogModule.service);
 
     var shareTitle = 'Play Detective, a game by @fourtonfish';
     if (shareChatLogModule.service !== null && shareChatLogModule.service === 'reddit'){
@@ -684,7 +683,6 @@ function containsOffensiveLanguage(text){
 
 
     if (messageFrom === 'user' && /you.*re?.*(impostor|imposter|robot|bot)/gi.test(messageText) && userRole === 'detective' && gameFinished === false && messageText.indexOf('not') === -1){
-      console.log(messageText);
 
       if (new RegExp(['youarearobot',
                       'you\'rearobot',
@@ -798,7 +796,6 @@ function containsOffensiveLanguage(text){
   });
 
   socket.on('chat_log_saved', function(data) {
-    console.log('chat log saved');
     shareChatLogModule.chatLogId = data;
     shareChatLog();
   });
@@ -824,7 +821,6 @@ function containsOffensiveLanguage(text){
   socket.on('partner disconnected', function(data) {
     addMessage('system', 'Partner disconnected.');
     showSharingButtons();
-    console.log('Partner disconnected: ' + data + '.');
 
     if (data === 'ping timeout'){
       //TODO: Was this a bot?
