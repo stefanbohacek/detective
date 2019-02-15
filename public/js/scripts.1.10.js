@@ -642,7 +642,7 @@ function containsOffensiveLanguage(text){
     }
 
     if (messageText === 'Game is over' && messageFrom === 'system'){
-      newMessage.innerHTML += 'Follow <a href="https://twitter.com/detectivelogs">@detectivelogs</a> for updates!</p>';
+      newMessage.innerHTML += ' Follow <a href="https://twitter.com/detectivelogs">@detectivelogs</a> for updates!</p>';
     }
 
 
