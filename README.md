@@ -53,12 +53,10 @@ var connection = mysql.createConnection({
 7. Open `http://localhost:4000/play` in your browser (or `http://localhost:4000/` to see the landing page, but note that the Play link doesn't *quite* work).
 8. To edit the front end JavaScript, go to the `/src/scripts` folder, bump the version of the `scripts.1.x.js` file (also update the file `/views/play.handlebars` so that it loads the updated version).
 
-If you have any questions, try [stefan@botwiki.org](mailto:stefan@botwiki.org), [@fourtonfish](https://twitter.com/fourtonfish), or join [botmakers.org](https://botmakers.org/) and look for **@stefan**.
+If you have any questions, try [stefan@fourtonfish.com](mailto:stefan@fourtonfish.com), [@fourtonfish](https://twitter.com/fourtonfish), or join [botmakers.org](https://botmakers.org/) and look for **@stefan**.
 
 Some of the code really needs to be cleaned up: see hacks such as using a class `shifted-1`, or how some of the code really should be modularized (for example the `badWords`).
 
-Feel free to [open a new issue](https://github.com/botwiki/detective/issues/new) if you notice anything that should be fixed, or would like to see a new feature added.
-
-Also, one way to support the development is to [donate to Botwiki](https://botwiki.org/about/support/), which will also get you on the [list of supporters](https://botwiki.org/about/supporters/) :-)
+Feel free to [open a new issue](https://github.com/fourtonfish/detective/issues/new) if you notice anything that should be fixed, or would like to see a new feature added.
 
 Thanks!

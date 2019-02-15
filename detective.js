@@ -1,5 +1,3 @@
-require('newrelic');
-
 var config = require('./config'),
     express = require('express'),
     exphbs  = require('express-handlebars'),
@@ -154,14 +152,14 @@ app.get('/', function (req, res) {
       banner_url: banner_url,
       // TODO: Find a better way to solve this!      
       production_url_fix: process.env.NODE_ENV === 'production' ? '/detective' : '',
-      userIsLoggedIn: req.session.passport.user ? true : false,
-      userName: req.session.passport.user ? req.session.passport.user.username : null
+      userIsLoggedIn: ( req.session && req.session.passport && req.session.passport.user ) ? true : false,
+      userName: ( req.session && req.session.passport && req.session.passport.user ) ? req.session.passport.user.username : null
     });
 });
 
 app.get('/play', function (req, res) {
   globalReq = req;
-  if (req.session.passport.user){
+  if (req.session && req.session.passport && req.session.passport.user){
     console.log(req.session.passport.user.username);
     console.log(req.session.passport.user.id);
 

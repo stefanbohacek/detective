@@ -642,7 +642,7 @@ function containsOffensiveLanguage(text){
     }
 
     if (messageText === 'Game is over' && messageFrom === 'system'){
-      newMessage.innerHTML += '<p style="color: #fff !important;">DETECTIVE is a <a target="_blank" href="https://botwiki.org/projects/#detective">Botwiki project</a>, please consider <a href="https://botwiki.org/about/support/" target="_blank">supporting it</a> :-) Follow <a href="https://twitter.com/detectivelogs">@detectivelogs</a> for updates!</p>';
+      newMessage.innerHTML += '<p style="color: #fff !important;">Follow <a href="https://twitter.com/detectivelogs">@detectivelogs</a> for updates!</p>';
     }
 
 
