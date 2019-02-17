@@ -317,6 +317,7 @@ app.get('/leaderboard', function (req, res) {
       var data;
       res.render('leaderboard', {
           rows: rows,
+          totalPlayerCount: rows.length,
           sortDetectives: sortDetectives,
           sortImpostors: sortImpostors
       });        
