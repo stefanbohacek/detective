@@ -4,9 +4,9 @@
 
 <section id="leaderboard">
 {{#if sortDetectives}}
-  <p>Top 25 players (out of {{totalPlayerCount}}) by best Detective score, <a href="/detective/leaderboard?sort=impostor">see best Impostors</a>.</p>
+  <p>Top 25 players by best Detective score, <a href="/detective/leaderboard?sort=impostor">see best Impostors</a>.</p>
 {{else if sortImpostors}}
-  <p>Top 25 players (out of {{totalPlayerCount}}) by best Impostor score, <a href="/detective/leaderboard?sort=detective">see best Detectives</a>.</p>
+  <p>Top 25 players by best Impostor score, <a href="/detective/leaderboard?sort=detective">see best Detectives</a>.</p>
 {{else}}
   <p>Sort the players by <a href="/detective/leaderboard?sort=impostor">best Impostors</a> or <a href="/detective/leaderboard?sort=detective">best Detectives</a>.</p>
 {{/if}}
