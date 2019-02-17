@@ -312,7 +312,7 @@ app.get('/leaderboard', function (req, res) {
     exclude_from_leaderboard = ' WHERE user_name <> "fourtonfish" AND user_name <> "botwikidotorg" ';
   }
 
-  connection.query('SELECT * from users' + exclude_from_leaderboard + 'LIMIT 25 ORDER BY ' + order_by, function(err, rows, fields) {
+  connection.query('SELECT * from users' + exclude_from_leaderboard + 'ORDER BY ' + order_by + ' LIMIT 25', function(err, rows, fields) {
     if (!err){
       var data;
       res.render('leaderboard', {
