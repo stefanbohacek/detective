@@ -17,7 +17,7 @@ Play the game a few times, and observe how the Robot answers questions. As an Im
 
 [![Not even trying](/readme-images/doing-it-wrong.png)](http://fourtonfish.com/detective/log?id=878)
 
-The chat bot used to learn from its input, and while there is a [simple word filter](https://github.com/dariusk/wordfilter) implemented in the game, I decided to temporarily turn this feature off until there is a more robust system in place.
+The chat bot can learn from its input, but note that this feature can be temporarily disabled at times.
 
 
 ## Join the development (please!)
