@@ -306,20 +306,43 @@ app.get('/leaderboard', function (req, res) {
     exclude_from_leaderboard = ' WHERE user_name <> "fourtonfish" AND user_name <> "botwikidotorg" ';
   }
 
-  connection.query('SELECT * from users' + exclude_from_leaderboard + 'ORDER BY ' + order_by + ' LIMIT 25', function(err, rows, fields) {
+  connection.query('SELECT COUNT(*) AS count from users' + exclude_from_leaderboard, function(err, rows, fields) {
     if (!err){
-      var data;
-      res.render('leaderboard', {
-          rows: rows,
-          totalPlayerCount: rows.length,
-          sortDetectives: sortDetectives,
-          sortImpostors: sortImpostors
-      });        
+      if ( rows && rows.length === 1 ){
+        const userCount = rows[0].count.toLocaleString('en');
 
+        connection.query('SELECT * from users' + exclude_from_leaderboard + 'ORDER BY ' + order_by + ' LIMIT 25', function(err, rows, fields) {
+          if (!err){
+            var data;
+            res.render('leaderboard', {
+                rows: rows,
+                totalPlayerCount: userCount,
+                sortDetectives: sortDetectives,
+                sortImpostors: sortImpostors
+            });        
+
+          }
+          else{
+            console.log('Error while performing Query.');
+            console.log(err);
+            res.render('error', {
+                error: "Can't connect to the database."
+            });        
+          }
+        });
+      }
+      else{
+        res.render('error', {
+            error: "Can't connect to the database."
+        });
+      }
     }
     else{
       console.log('Error while performing Query.');
       console.log(err);
+      res.render('error', {
+          error: "Can't connect to the database."
+      });        
     }
   });
 });
