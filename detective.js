@@ -48,13 +48,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : process.env.DB_PASSWORD,
-  database : 'detective_db'
-});
-
+var connection = mysql.createConnection(config.db);
 
 var unassignedUsers = [],
     rooms = [],
