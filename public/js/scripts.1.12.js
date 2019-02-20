@@ -492,9 +492,9 @@ function containsOffensiveLanguage(text){
             robotRespond(lessClever(resp.message));            
           }
         } else {
-          console.log('ERROR');
-          console.log(request.responseText);
-          alert('ERROR: ' + request.responseText + '\n\nPlease contact stefan@fourtonfish.com.\n\nThanks!');
+          // console.log('ERROR');
+          // console.log(request.responseText);
+          // alert('ERROR: ' + request.responseText + '\n\nPlease contact stefan@fourtonfish.com.\n\nThanks!');
         }
       };
 
@@ -544,6 +544,9 @@ function containsOffensiveLanguage(text){
     message = message.replace(/(RobotNotImpostor(\d)*|Jenny|linh truong|Alice)/gi, robot.name);
     message = message.replace(/ROBOTFROM/gi, robot.from);
     robot.pendingResponses.push(message);
+
+    console.log( robot.pendingResponses.length );
+    
     if (robot.pendingResponses.length > 0){
       var nextMessage = robot.pendingResponses.shift(),
           nextMessageLength = nextMessage.length,
