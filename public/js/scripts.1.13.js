@@ -738,7 +738,7 @@ function containsOffensiveLanguage(text){
     // socket = io(document.location.protocol + '//fourtonfish.com/detective');
 
     socket = io('//fourtonfish.com/', {     // note changed URL here
-      path: '/detective',
+      path: '/detective/socket.io',
       autoConnect: true,
       // transports: ['websocket'],
     });
