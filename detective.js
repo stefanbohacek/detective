@@ -151,6 +151,10 @@ app.get('/', function (req, res) {
     });
 });
 
+app.get('/socket.io', function (req, res) {
+  res.redirect('https://fourtonfish.com/detective/socket.io');
+});
+
 app.get('/play', function (req, res) {
   globalReq = req;
   if (req.session && req.session.passport && req.session.passport.user){
