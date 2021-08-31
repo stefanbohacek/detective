@@ -545,6 +545,8 @@ function containsOffensiveLanguage(text){
     message = message.replace(/ROBOTFROM/gi, robot.from);
     robot.pendingResponses.push(message);
 
+    console.log( robot.pendingResponses.length );
+    
     if (robot.pendingResponses.length > 0){
       var nextMessage = robot.pendingResponses.shift(),
           nextMessageLength = nextMessage.length,
@@ -732,7 +734,7 @@ function containsOffensiveLanguage(text){
   var socket;
 
   if (productionServer()){
-    socket = io(document.location.protocol + '//fourtonfish.com:3003');
+    socket = io(document.location.protocol + '//fourtonfish.com/detective');
   }
   else{
     socket = io(document.location.protocol + '//' + document.location.host);

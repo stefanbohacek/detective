@@ -23,7 +23,7 @@ var config = require('./config'),
     TwitterStrategy = require('passport-twitter').Strategy;
 
 if (process.env.NODE_ENV === 'production'){
-  config.twitter.callbackURL = 'http://fourtonfish.com/detective/auth/twitter/callback';
+  config.twitter.callbackURL = 'https://fourtonfish.com/detective/auth/twitter/callback';
 }
 
 passport.use(new TwitterStrategy(config.twitter,
@@ -158,7 +158,6 @@ app.get('/play', function (req, res) {
     console.log(req.session.passport.user.id);
 
     var user = null;
-
 
     connection.query('SELECT * from users WHERE service_uid = ' + req.session.passport.user.id, function(err, rows, fields) {
       if (!err){
@@ -356,8 +355,6 @@ server.listen(3003, function(){
 var ios = require('socket.io-express-session');
 
 io.use(ios(session));
-
-
 
 io.on('connection', function (socket) {
   try{
