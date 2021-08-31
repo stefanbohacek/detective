@@ -739,7 +739,7 @@ function containsOffensiveLanguage(text){
 
     socket = io('//fourtonfish.com/', {     // note changed URL here
       path: '/detective',
-      autoConnect: false,
+      autoConnect: true,
       transports: ['websocket'],
     });
     console.log( socket );
