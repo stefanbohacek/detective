@@ -734,7 +734,9 @@ function containsOffensiveLanguage(text){
   var socket;
 
   if (productionServer()){
-    socket = io(document.location.protocol + '//fourtonfish.com:3003');
+    // socket = io(document.location.protocol + '//fourtonfish.com:3003');
+    socket = io(document.location.protocol + '//fourtonfish.com/detective');
+    console.log( socket );
   }
   else{
     socket = io(document.location.protocol + '//' + document.location.host);
