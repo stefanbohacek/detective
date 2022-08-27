@@ -3,4 +3,4 @@ Disallow:
 User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
-Sitemap: http://fourtonfish.com/sitemap.xml
+Sitemap: http://stefanbohacek.com/sitemap.xml

@@ -73,7 +73,7 @@ function ready(fn) {
 }
 
 function productionServer(){
-  return (window.location.href.indexOf('fourtonfish.com') > -1);
+  return (window.location.href.indexOf('stefanbohacek.com') > -1);
 }
 
 function removeClasses(el){
@@ -385,14 +385,14 @@ function containsOffensiveLanguage(text){
   function shareChatLog(){
     shareChatLogModule.service = shareTarget.getAttribute('data-service');
 
-    var shareTitle = 'Play Detective, a game by @fourtonfish';
+    var shareTitle = 'Play Detective, a game by @stefanbohacek';
     if (shareChatLogModule.service !== null && shareChatLogModule.service === 'reddit'){
       shareTitle = '[log] TITLE';
     }
 
     shareChatLogModule.shareUrl = shareTarget.getAttribute('data-url')
       .replace(/DESCRIPTION/, 'Detective: A "reverse Turing test" chat game.')
-      .replace(/CHATLOGURL/gi, 'http://fourtonfish.com/detective/log?id=' + shareChatLogModule.chatLogId)
+      .replace(/CHATLOGURL/gi, 'http://stefanbohacek.com/detective/log?id=' + shareChatLogModule.chatLogId)
       .replace(/SHORTTITLE/, shareTitle);
 
 
@@ -494,7 +494,7 @@ function containsOffensiveLanguage(text){
         } else {
           // console.log('ERROR');
           // console.log(request.responseText);
-          // alert('ERROR: ' + request.responseText + '\n\nPlease contact stefan@fourtonfish.com.\n\nThanks!');
+          // alert('ERROR: ' + request.responseText + '\n\nPlease contact stefan@stefanbohacek.com.\n\nThanks!');
         }
       };
 
@@ -673,7 +673,7 @@ function containsOffensiveLanguage(text){
     }
     else{
       if (!document.hasFocus()){
-        document.title = 'New message | Detective by @fourtonfish';
+        document.title = 'New message | Detective by @stefanbohacek';
       }
     }
 
@@ -727,17 +727,17 @@ function containsOffensiveLanguage(text){
 
   window.addEventListener("focus", function(event) {
     if (userRole !== undefined){
-      document.title = 'You are the ' + userRole + ' | Detective by @fourtonfish';
+      document.title = 'You are the ' + userRole + ' | Detective by @stefanbohacek';
     }
   }, false);
 
   var socket;
 
   if (productionServer()){
-    // socket = io(document.location.protocol + '//fourtonfish.com:3003');
-    // socket = io(document.location.protocol + '//fourtonfish.com/detective');
+    // socket = io(document.location.protocol + '//stefanbohacek.com:3003');
+    // socket = io(document.location.protocol + '//stefanbohacek.com/detective');
 
-    socket = io('//fourtonfish.com/', {     // note changed URL here
+    socket = io('//stefanbohacek.com/', {     // note changed URL here
       path: '/detective/socket.io',
       autoConnect: true,
       // transports: ['websocket'],
@@ -873,7 +873,7 @@ function containsOffensiveLanguage(text){
     }
 //    whatIsThisLink.classList.add('shiftedUp');
     dismissInstructionsButton.focus();
-    document.title = 'You are the ' + userRole + ' | Detective by @fourtonfish';
+    document.title = 'You are the ' + userRole + ' | Detective by @stefanbohacek';
     roleReminder.innerHTML = 'the <span class="highlight">' + userRole + '</span>';
     youAre.innerHTML = 'You are the <span class="highlight">' + userRole + '</span>';
     if (userRole === 'detective'){

@@ -23,7 +23,7 @@ var config = require('./config'),
     TwitterStrategy = require('passport-twitter').Strategy;
 
 if (process.env.NODE_ENV === 'production'){
-  config.twitter.callbackURL = 'https://fourtonfish.com/detective/auth/twitter/callback';
+  config.twitter.callbackURL = 'https://stefanbohacek.com/detective/auth/twitter/callback';
 }
 
 passport.use(new TwitterStrategy(config.twitter,
@@ -152,7 +152,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/socket.io', function (req, res) {
-  res.redirect('https://fourtonfish.com/detective/socket.io');
+  res.redirect('https://stefanbohacek.com/detective/socket.io');
 });
 
 app.get('/play', function (req, res) {
@@ -306,7 +306,7 @@ app.get('/leaderboard', function (req, res) {
   var exclude_from_leaderboard = ' WHERE 1 ';
 
   if (process.env.NODE_ENV === 'production'){
-    exclude_from_leaderboard = ' WHERE user_name <> "fourtonfish" AND user_name <> "botwikidotorg" ';
+    exclude_from_leaderboard = ' WHERE user_name <> "stefanbohacek" AND user_name <> "botwikidotorg" ';
   }
 
   connection.query('SELECT COUNT(*) AS count from users' + exclude_from_leaderboard, function(err, rows, fields) {

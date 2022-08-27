@@ -1,10 +1,10 @@
 # DETECTIVE
 
-[![A dective](/readme-images/detective.png)](http://fourtonfish.com/detective/)
+[![A dective](/readme-images/detective.png)](http://stefanbohacek.com/detective/)
 
 ## About the game
 
-Detective is a game created by [Stefan Bohacek](https://twitter.com/fourtonfish). The rules are fairly simple:
+Detective is a game created by [Stefan Bohacek](https://twitter.com/stefanbohacek). The rules are fairly simple:
 
 1. When the game starts, players get randomly assigned the role of a Detective, or an Impostor.
 2. There is a third role in the game, the Robot, which is a chat bot powered by [BOT libre!](https://www.botlibre.com/).
@@ -15,7 +15,7 @@ Detective is a game created by [Stefan Bohacek](https://twitter.com/fourtonfish)
 Play the game a few times, and observe how the Robot answers questions. As an Impostor, you will want to mimic those responses. If you're playing as a Detective, well, good luck, I guess!
 
 
-[![Not even trying](/readme-images/doing-it-wrong.png)](http://fourtonfish.com/detective/log?id=878)
+[![Not even trying](/readme-images/doing-it-wrong.png)](http://stefanbohacek.com/detective/log?id=878)
 
 The chat bot can learn from its input, but note that this feature can be temporarily disabled at times.
 
@@ -53,10 +53,10 @@ var connection = mysql.createConnection({
 7. Open `http://localhost:4000/play` in your browser (or `http://localhost:4000/` to see the landing page, but note that the Play link doesn't *quite* work).
 8. To edit the front end JavaScript, go to the `/src/scripts` folder, bump the version of the `scripts.1.x.js` file (also update the file `/views/play.handlebars` so that it loads the updated version).
 
-If you have any questions, try [stefan@fourtonfish.com](mailto:stefan@fourtonfish.com), [@fourtonfish](https://twitter.com/fourtonfish), or join [botmakers.org](https://botmakers.org/) and look for **@stefan**.
+If you have any questions, try [stefan@stefanbohacek.com](mailto:stefan@stefanbohacek.com), [@stefanbohacek](https://twitter.com/stefanbohacek), or join [botmakers.org](https://botmakers.org/) and look for **@stefan**.
 
 Some of the code really needs to be cleaned up: see hacks such as using a class `shifted-1`, or how some of the code really should be modularized (for example the `badWords`).
 
-Feel free to [open a new issue](https://github.com/fourtonfish/detective/issues/new) if you notice anything that should be fixed, or would like to see a new feature added.
+Feel free to [open a new issue](https://github.com/stefanbohacek/detective/issues/new) if you notice anything that should be fixed, or would like to see a new feature added.
 
 Thanks!
