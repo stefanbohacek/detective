@@ -42,7 +42,6 @@
     "tiny-lr": "0.0.7"
   },
   "scripts": {
-    "start": "node detective.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "stefan@stefanbohacek.com",
