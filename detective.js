@@ -1,5 +1,4 @@
-// var config = require('./config'),
-var config = {},
+var config = require('./config-example'),
     express = require('express'),
     exphbs  = require('express-handlebars'),
     http = require('http'),
