@@ -125,7 +125,7 @@ const createRoom = () => {
   }
 }
 
-const reassignUsers(socket) => {
+const reassignUsers = (socket) => {
   if (unassignedUsers.indexOf(socket) === -1){
     unassignedUsers.push(socket);
     if (unassignedUsers.length === 2){
