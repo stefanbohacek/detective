@@ -21,19 +21,24 @@ const express = require('express'),
         store: new SessionStore({
           path: __dirname + '/tmp/sessions'
         }),
-        secret: config.secret,
+        secret: process.env.SECRET,
         resave: true,
         saveUninitialized: true
       }),
       passport = require('passport'),
       TwitterStrategy = require('passport-twitter').Strategy;
 
-if (process.env.NODE_ENV === 'production'){
-  config.twitter.callbackURL = 'https://stefanbohacek.com/detective/auth/twitter/callback';
-}
+// if (process.env.NODE_ENV === 'production'){
+//   config.twitter.callbackURL = 'https://stefanbohacek.com/detective/auth/twitter/callback';
+// }
 
-passport.use(new TwitterStrategy(config.twitter,
-  (token, tokenSecret, profile, cb) => {
+passport.use(new TwitterStrategy({
+  consumerKey: process.env.CONSUMER_KEY,
+  consumerSecret: process.env.CONSUMER_SECRET,
+  accessToken: process.env.ACCESS_TOKEN,
+  accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
+  callbackURL: process.env.CALLBACK_URL
+},  (token, tokenSecret, profile, cb) => {
     //console.log(profile.username);
     // User.findOrCreate({ twitterId: profile.id }, (err, user) => {
     //   return cb(err, user);
@@ -54,7 +59,12 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
-let connection = mysql.createConnection(config.db);
+let connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
+});
 
 let unassignedUsers = [],
     rooms = [],
