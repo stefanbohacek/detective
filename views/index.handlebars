@@ -6,22 +6,22 @@
   <ul class="navigation-menu shifted">
     {{#if userIsLoggedIn }}
       <li>
-        <a href="{{production_url_fix}}/play" class="primary-button shifted">Play as @{{userName}}</a>
+        <a href="/play" class="primary-button shifted">Play as @{{userName}}</a>
       </li>
       <li>
-        <a href="{{production_url_fix}}/logout?" class="secondary-button shifted">Logout</a>
+        <a href="/logout?" class="secondary-button shifted">Logout</a>
       </li> 
     {{else}}
       <li>
-        <a href="{{production_url_fix}}/auth/twitter?" class="primary-button shifted"><img class="twitter-icon" src="images/twitter.svg"> Login and play</a>
+        <a href="/auth/twitter?" class="primary-button shifted"><img class="twitter-icon" src="images/twitter.svg"> Login and play</a>
       </li>
       <li>
-        <a href="{{production_url_fix}}/play" class="secondary-button shifted">Play</a>
+        <a href="/play" class="secondary-button shifted">Play</a>
       </li> 
     {{/if}}
 
     <li>
-      <a href="{{production_url_fix}}/leaderboard?sort=impostor" class="secondary-button shifted">Leaderboard</a>
+      <a href="/leaderboard?sort=impostor" class="secondary-button shifted">Leaderboard</a>
     </li>
     <li>
       <a href="#about" class="secondary-button shifted">About</a>
@@ -64,7 +64,7 @@
     <img class="shifted" src="images/art/robot.png" title="A scuba diver pretending to be a robot">
   </div>
   
-  <p class="shifted">You have an option to <strong>sign in using your Twitter account</strong> to record the number of games you played in each role and your success rate. You can see the top players <a href="{{production_url_fix}}/leaderboard?sort=impostor">on the leaderboard page</a>.</p> 
+  <p class="shifted">You have an option to <strong>sign in using your Twitter account</strong> to record the number of games you played in each role and your success rate. You can see the top players <a href="/leaderboard?sort=impostor">on the leaderboard page</a>.</p> 
 
   
   <p class="shifted">If you'd like to learn more about the game, check out <a href="https://stefanbohacek.com/tag/detective/">related posts on my blog</a>. You can also follow <a href="https://twitter.com/detectivelogs">@detectivelogs</a> for updates and "best of Detective logs".</p>
