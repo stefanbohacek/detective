@@ -508,10 +508,10 @@ io.on('connection', (socket) => {
 
             switch(role){
               case 'detective':
-                let updated_score = ', played_as_detective = ' + (fetched_user.played_as_detective + 1);
+                updated_score = ', played_as_detective = ' + (fetched_user.played_as_detective + 1);
               break;
               case 'impostor':
-                let updated_score = ', played_as_detective = ' + (fetched_user.played_as_impostor + 1);
+                updated_score = ', played_as_detective = ' + (fetched_user.played_as_impostor + 1);
               break;
             }
 
