@@ -14,7 +14,6 @@ const express = require('express'),
       app = express(),
       server = http.Server(app),
       io = socketio.listen(server),
-      globalReq,
       Session = require('express-session'),
       SessionStore = require('session-file-store')(Session),
       session = Session({
@@ -27,6 +26,8 @@ const express = require('express'),
       }),
       passport = require('passport'),
       TwitterStrategy = require('passport-twitter').Strategy;
+
+let globalReq;
 
 // if (process.env.NODE_ENV === 'production'){
 //   config.twitter.callbackURL = 'https://stefanbohacek.com/detective/auth/twitter/callback';
