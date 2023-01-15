@@ -449,14 +449,16 @@ io.on('connection', (socket) => {
             console.log('fetched_user:');
             console.log(fetched_user);
 
+            let updated_score;
+
             switch(role){
               case 'detective':
-                let updated_score = ', played_as_detective = ' + (fetched_user.played_as_detective + 1);
-                    updated_score += ', won_as_detective = ' + (fetched_user.won_as_detective + 1);
+                updated_score = ', played_as_detective = ' + (fetched_user.played_as_detective + 1);
+                updated_score += ', won_as_detective = ' + (fetched_user.won_as_detective + 1);
               break;
               case 'impostor':
-                let updated_score = ', played_as_impostor = ' + (fetched_user.played_as_impostor + 1);
-                    updated_score += ', won_as_impostor = ' + (fetched_user.won_as_impostor + 1);
+                updated_score = ', played_as_impostor = ' + (fetched_user.played_as_impostor + 1);
+                updated_score += ', won_as_impostor = ' + (fetched_user.won_as_impostor + 1);
               break;
             }
 
