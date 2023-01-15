@@ -152,7 +152,7 @@ app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect('/detective/play');
+    res.redirect('/play');
   });
 
 app.get('/', (req, res) => {
