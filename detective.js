@@ -581,6 +581,8 @@ io.on('connection', (socket) => {
     if (loggingEnabled === true){
       console.log(socket.adapter.sids[socket.id]);
     }
-    Object.getPrototypeOf(this).onclose.call(this,reason);
+    try{
+      Object.getPrototypeOf(this).onclose.call(this,reason);
+    } catch(err){/* noop */}
   }  
 });
