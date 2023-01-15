@@ -4,14 +4,6 @@ if (fs.existsSync('.env')){
   require('dotenv').config();
 }
 
-console.log({
-  consumerKey: process.env.CONSUMER_KEY,
-  consumerSecret: process.env.CONSUMER_SECRET,
-  accessToken: process.env.ACCESS_TOKEN,
-  accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
-  callbackURL: process.env.CALLBACK_URL
-});
-
 const express = require('express'),
       exphbs  = require('express-handlebars'),
       http = require('http'),
