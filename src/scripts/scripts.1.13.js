@@ -64,7 +64,7 @@ var xmlToJSON = function(xmlValue) {
   return jsonValue;
 };
 
-function ready(fn) {
+window.ready = (fn) => {
   if (document.readyState !== 'loading'){
     fn();
   } else {
