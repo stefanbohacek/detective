@@ -1,6 +1,6 @@
 "strict";
 
-window.ready = (fn) => {
+window.ready = function(fn) {
   if (document.readyState !== 'loading'){
     fn();
   } else {
