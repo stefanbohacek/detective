@@ -1,12 +1,12 @@
 "strict";
 
-function ready(fn) {
-  if (document.readyState !== 'loading'){
-    fn();
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
-}
+// function ready(fn) {
+//   if (document.readyState !== 'loading'){
+//     fn();
+//   } else {
+//     document.addEventListener('DOMContentLoaded', fn);
+//   }
+// }
 
 ready(function(){
   var shiftedEls = document.getElementsByClassName('shifted-short');
