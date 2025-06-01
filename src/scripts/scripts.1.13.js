@@ -392,7 +392,7 @@ function containsOffensiveLanguage(text){
 
     shareChatLogModule.shareUrl = shareTarget.getAttribute('data-url')
       .replace(/DESCRIPTION/, 'Detective: A "reverse Turing test" chat game.')
-      .replace(/CHATLOGURL/gi, 'http://stefanbohacek.com/detective/log?id=' + shareChatLogModule.chatLogId)
+      .replace(/CHATLOGURL/gi, 'http://detective.stefanbohacek.com/log?id=' + shareChatLogModule.chatLogId)
       .replace(/SHORTTITLE/, shareTitle);
 
 

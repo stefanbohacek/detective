@@ -32,7 +32,7 @@ const express = require('express'),
 let globalReq;
 
 // if (process.env.NODE_ENV === 'production'){
-//   config.twitter.callbackURL = 'https://stefanbohacek.com/detective/auth/twitter/callback';
+//   config.twitter.callbackURL = 'https://detective.stefanbohacek.com/auth/twitter/callback';
 // }
 
 passport.use(new TwitterStrategy({

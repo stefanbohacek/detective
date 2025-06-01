@@ -1,10 +1,10 @@
 # DETECTIVE
 
-[![A dective](/readme-images/detective.png)](http://stefanbohacek.com/detective/)
+[![A dective](/readme-images/detective.png)](https://detective.stefanbohacek.com/)
 
 ## About the game
 
-Detective is a game created by [Stefan Bohacek](https://twitter.com/stefanbohacek). The rules are fairly simple:
+Detective is a game created by [Stefan Bohacek](https://stefanbohacek.online/@stefan). The rules are fairly simple:
 
 1. When the game starts, players get randomly assigned the role of a Detective, or an Impostor.
 2. There is a third role in the game, the Robot, which is a chat bot powered by [BOT libre!](https://www.botlibre.com/).
@@ -15,7 +15,7 @@ Detective is a game created by [Stefan Bohacek](https://twitter.com/stefanbohace
 Play the game a few times, and observe how the Robot answers questions. As an Impostor, you will want to mimic those responses. If you're playing as a Detective, well, good luck, I guess!
 
 
-[![Not even trying](/readme-images/doing-it-wrong.png)](http://stefanbohacek.com/detective/log?id=878)
+[![Not even trying](/readme-images/doing-it-wrong.png)](https://detective.stefanbohacek.com/log?id=878)
 
 The chat bot can learn from its input, but note that this feature can be temporarily disabled at times.
 

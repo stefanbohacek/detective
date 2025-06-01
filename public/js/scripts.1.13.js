@@ -392,7 +392,7 @@ function containsOffensiveLanguage(text){
 
     shareChatLogModule.shareUrl = shareTarget.getAttribute('data-url')
       .replace(/DESCRIPTION/, 'Detective: A "reverse Turing test" chat game.')
-      .replace(/CHATLOGURL/gi, 'http://stefanbohacek.com/detective/log?id=' + shareChatLogModule.chatLogId)
+      .replace(/CHATLOGURL/gi, 'http://detective.stefanbohacek.com/log?id=' + shareChatLogModule.chatLogId)
       .replace(/SHORTTITLE/, shareTitle);
 
 
@@ -731,22 +731,7 @@ function containsOffensiveLanguage(text){
     }
   }, false);
 
-  var socket;
-
-  if (productionServer()){
-    // socket = io(document.location.protocol + '//stefanbohacek.com:3003');
-    // socket = io(document.location.protocol + '//stefanbohacek.com/detective');
-
-    socket = io('//stefanbohacek.com/', {     // note changed URL here
-      path: '/detective/socket.io',
-      autoConnect: true,
-      // transports: ['websocket'],
-    });
-    console.log( socket );
-  }
-  else{
-    socket = io(document.location.protocol + '//' + document.location.host);
-  }
+  var socket = io(document.location.protocol + '//' + document.location.host);;
 
   if (dismissInstructionsButton){
     dismissInstructionsButton.addEventListener('click', function(){
